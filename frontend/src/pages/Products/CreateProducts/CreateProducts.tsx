@@ -104,8 +104,8 @@ function CreateProduct() {
   }, []);
 
   // Go back to the home page
-  const handleBacktoHome = () => {
-    navigate('/SellerHome'); 
+  const handleBacktoHomeSeller = () => {
+    navigate('/'); 
   };
 
   return (
@@ -145,7 +145,7 @@ function CreateProduct() {
                 <img
                   src={backarrow}
                   alt="backarrow"
-                  onClick={handleBacktoHome}
+                  onClick={handleBacktoHomeSeller}
                   style={{
                     width: "40px",
                     cursor: "pointer",

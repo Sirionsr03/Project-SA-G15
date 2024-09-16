@@ -62,7 +62,7 @@ function ApplyToSeller() {
         content: "บันทึกข้อมูลสำเร็จ",
       });
       setTimeout(function () {
-        navigate("/SellerHome");
+        navigate("/HomeSeller");
       }, 2000);
     } else {
       messageApi.open({
@@ -110,12 +110,12 @@ function ApplyToSeller() {
       {contextHolder}
       <Card  
         style={{
-          // marginLeft:"auto",
-          margin:"center",
+          marginTop:"30px",
+          marginLeft:"250px",
           borderRadius: "12px",
           padding: "24px",
           background: "#e2dfdf",
-          width:"auto",
+          // width:"auto",
           // width:"1100px",
           boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
         }}>
