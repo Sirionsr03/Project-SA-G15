@@ -6,6 +6,7 @@ export interface ProductsInterface {
 	PictureProduct?: string ;
 	Weight?:          GLfloat;
 	Status?:          string;	
-	Category?:        string;
-	Condition?:       string;
+	CategoryID?:        number;
+	ConditionID?:       number;
+	SellerID?: number;
 }

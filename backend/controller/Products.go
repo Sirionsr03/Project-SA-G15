@@ -45,11 +45,11 @@ func CreateProducts(c *gin.Context) {
 		Title:           product.Title,
 		Description:     product.Description,
 		Price:           product.Price,
-		Category:        product.Category,
 		PictureProduct: product.PictureProduct,
-		Condition:       product.Condition,
 		Weight:          product.Weight,
 		Status:          product.Status,
+		CategoryID:        product.CategoryID,
+		ConditionID:       product.ConditionID,
 		// SellerID:        seller.ID, // เชื่อมกับ Seller ที่มีอยู่
 	}
 
