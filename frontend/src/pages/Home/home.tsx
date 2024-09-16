@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { PRODUCTS } from "../../Product";
 
-
 import banner1 from "../../assets/brandner.png";
 import banner2 from "../../assets/Brandner2.png";
 import banner3 from "../../assets/Brandner3.png";
@@ -16,9 +15,8 @@ import categoryIcon7 from "../../icon/pants.png";
 
 
 import "./home.css";
-
-import { Col } from "antd";
 import Navbar from "../../component/navbar";
+import { Col } from "antd";
 import { ItemCard } from "./products";
 
 

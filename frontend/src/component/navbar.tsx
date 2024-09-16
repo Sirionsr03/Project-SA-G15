@@ -1,5 +1,5 @@
 import "./navbar.css";
-import Logo from "../../src/assets/logo copy.png"
+import Logo from "../../src/assets/logo copy.png";
 import { Link } from "react-router-dom";
 
 
@@ -26,4 +26,3 @@ const Navbar = () => {
 }
 
 export default Navbar;
-

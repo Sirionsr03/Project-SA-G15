@@ -3,7 +3,7 @@ import { ChatCircleDots, ShoppingCart, BellRinging, List } from "phosphor-react"
 import Logo from "../../assets/logo copy.png";
 
 
-const Navbar = () => {
+const NavbarLogin = () => {
   return (
     <div className='navbar'>
       <img src={Logo} className='logo' alt='Course Logo' />
@@ -23,4 +23,4 @@ const Navbar = () => {
   );
 }
 
-export default Navbar;
+export default NavbarLogin;

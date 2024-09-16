@@ -14,7 +14,7 @@ import icons5 from "../../icon/shirt.png";
 import icons6 from "../../icon/skirt.png";
 import icons7 from "../../icon/pants.png";
 import "../Home/home.css";
-import NavbarLogin from "./NavbarLogin";
+import NavbarLogin from "./navbarLogin";
 import { Course } from "./products";
 
 

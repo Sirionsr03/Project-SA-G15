@@ -13,14 +13,14 @@ const NavbarMember = () => {
   };
 
   return (
-    <div className='navbarmem'>
+    <div className='navbar'>
             <img
               src={Logo}
               alt="Course Logo"
               style={{
                 width: "200px",
                 marginRight: "20px",
-                marginTop:"0"
+                marginTop:"0px"
               }}
             />
      <div className='right-section'>

@@ -2,7 +2,7 @@
 
 
 
-.navbarmem {
+.navbar {
   width: 98%;
   height: 150px;
   background-color: rgb(255, 255, 255);
@@ -11,7 +11,6 @@
   align-items: center;
   padding: center;
   cursor: pointer;
-  margin-top: 1541px;
 }
 
 

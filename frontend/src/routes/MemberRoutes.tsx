@@ -2,12 +2,17 @@ import { lazy } from "react";
 
 import { RouteObject } from "react-router-dom";
 import Loadable from "../component/Loadable";
+import LoginPage from "../pages/authentication/Login/Login";
 import Profile from "../pages/authentication/Member/Profile";
-import ApplyToSeller from "../pages/Products/ApplyToSeller/ApplyToSeller";
+// import ApplyToSeller from "../pages/Products/ApplyToSeller/ApplyToSeller";
 
-const MainPages = Loadable(lazy(() => import("../pages/Home/home")));
+
+const MainPages = Loadable(lazy(() => import("../../src/pages/Home/home")));
+
+// const HomeLogin = Loadable(lazy(() => import("../../src/pages/HomeLogin/homelogin")));
 const HomeMember = Loadable(lazy(() => import("../pages/Home/Member/homemember")));
-const ProfileEdit = Loadable(lazy(() => import("../pages/authentication/Member/edit/ProfileEdit")));
+const ApplyToSeller = Loadable(lazy(() => import("../pages/Products/ApplyToSeller/ApplyToSeller")));
+const ProfileEdit = Loadable(lazy(() => import("../../src/pages/authentication/Member/edit/ProfileEdit")));
 
 
 const MemberRoutes = (isLoggedIn: boolean): RouteObject[] => {
@@ -17,17 +22,18 @@ const MemberRoutes = (isLoggedIn: boolean): RouteObject[] => {
       element: isLoggedIn ? <HomeMember /> : <MainPages />,
     },
     {
-      path: "/homemember",
+      path: "/HomeMember",
       element: <HomeMember />,
+    },
+  
+    {
+      path: "/Login",
+      element: <LoginPage />,
     },
     {
       path: "/apply-to-seller",
       element: <ApplyToSeller />,
     },
-    // {
-    //   path: "/Login",
-    //   element: <LoginPage />,
-    // },
     {
       path: "/Profile",
       element: <Profile />,

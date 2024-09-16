@@ -14,8 +14,9 @@ import icons5 from "../../../icon/shirt.png";
 import icons6 from "../../../icon/skirt.png";
 import icons7 from "../../../icon/pants.png";
 import "./homemember.css"
-import { Course } from '../Member/product';
+
 import NavbarMember from '../../../component/navbarMember';
+import { Course } from './product';
 
 const imageArray = [brandner1, brandner2, brandner3];
 
