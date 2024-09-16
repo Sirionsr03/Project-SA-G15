@@ -4,7 +4,7 @@ import logo from'../../../assets/LogoOrange.png'
 import { useNavigate } from "react-router-dom";
 import { Button, Form, Input, message, Col, Flex, Card, Row} from "antd";
 import { LoginInterface } from '../../../interfaces/Login';
-import {Login} from "../../../https/index"
+import {Login} from "../../../services/http/index"
 
 
 function LoginPage(){

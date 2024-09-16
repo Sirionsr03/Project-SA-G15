@@ -8,7 +8,7 @@ import bell from "../assets/bell.png";
 const NavbarMember = () => {
   const navigate = useNavigate(); // Hook for navigation
 
-  const handleCreateProduct = () => {
+  const handleApplySeller = () => {
     navigate('/apply-to-seller'); // Navigate to ApplyToSeller page
   };
 
@@ -28,7 +28,7 @@ const NavbarMember = () => {
          <div className="search">
            <input type="text" placeholder="search"/>
          </div>
-         <button className="button-createproduct" onClick={handleCreateProduct}>
+         <button className="button-createproduct" onClick={handleApplySeller}>
            สร้างการขายสินค้า
          </button>
          <div className="box-navbar">

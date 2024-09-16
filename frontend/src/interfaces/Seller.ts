@@ -1,5 +1,5 @@
 export interface SellerInterface{
-  MemberId: string;
+  	MemberId: number;
     ID?: number;
     StudentID?:        string;	
 	Major?:            string;	

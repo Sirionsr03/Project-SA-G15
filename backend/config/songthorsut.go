@@ -36,6 +36,8 @@ func SetupDatabase() {
 		&entity.InstituteOf{},
 		&entity.Category{},
 		&entity.Condition{},
+		&entity.Order{},
+		&entity.Products_order{},
 
 	)
 

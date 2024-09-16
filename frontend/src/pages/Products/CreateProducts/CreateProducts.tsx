@@ -1,14 +1,14 @@
 import './CreateProducts.css';
 import backarrow from "../../../assets/back-arrow.png";
 import Logo from "../../../assets/logo.png";
-import { Card, Col, Row, Input, Form, InputNumber, Upload, Image, Button, message, Select } from 'antd';
+import { Card, Col, Row, Input, Form, InputNumber, Upload, Image, Button, message, Select, Flex } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import type { UploadFile, UploadProps } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import ImgCrop from 'antd-img-crop';
 import { ProductsInterface } from '../../../interfaces/Products';
-import { CreateProducts, GetCategory, GetCondition } from '../../../https';
+import { CreateProducts, GetCategory, GetCondition } from '../../../services/http';
 import { CategoryInterface } from '../../../interfaces/Category';
 import { ConditionInterface } from '../../../interfaces/Condition';
 
@@ -105,11 +105,12 @@ function CreateProduct() {
 
   // Go back to the home page
   const handleBacktoHomeSeller = () => {
-    navigate('/'); 
+    navigate('/HomeSeller'); 
   };
 
   return (
-    <>
+    <div>
+    <Flex>
       {contextHolder}
       <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh" }}>
         <Card
@@ -117,7 +118,7 @@ function CreateProduct() {
             borderRadius: "12px",
             padding: "24px",
             background: "#e2dfdf",
-            width: "1100px",
+            // width: "1100px",
             boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
           }}
         >
@@ -299,7 +300,8 @@ function CreateProduct() {
           </Form>
         </Card>
       </div>
-    </>
+    </Flex>
+    </div>
   );
 }
 

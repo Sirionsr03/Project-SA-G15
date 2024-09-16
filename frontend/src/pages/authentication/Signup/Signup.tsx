@@ -2,7 +2,7 @@ import {Button,Card,Form,Input,message,Flex,Row,Col,InputNumber,DatePicker,Selec
 
 import { useNavigate } from "react-router-dom";
 
-import { CreateMember } from "../../../https";
+import { CreateMember } from "../../../services/http";
 
 import { MemberInterface } from "../../../interfaces/Member";
 

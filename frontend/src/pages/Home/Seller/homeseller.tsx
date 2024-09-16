@@ -13,13 +13,15 @@ import icons4 from "../../../icon/electronics.png";
 import icons5 from "../../../icon/shirt.png";
 import icons6 from "../../../icon/skirt.png";
 import icons7 from "../../../icon/pants.png";
-import "./homeseller.css";
-import { Course } from '../Member/product';
+import "./homeseller.css"
+
 import NavbarSeller from '../../../component/navbarSeller';
+import { Course } from './prducts';
+
 
 const imageArray = [brandner1, brandner2, brandner3];
 
-const Home = () => {
+const HomeSeller = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
@@ -58,4 +60,8 @@ const Home = () => {
   );
 }
 
-export default Home;
+export default HomeSeller;
+
+
+
+

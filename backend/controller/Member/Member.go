@@ -50,6 +50,7 @@ func GetMember(c *gin.Context) { // ดึงข้อมูลสมาชิ�
 	var member entity.Member
 
 	db := config.DB()
+	
 	result := db.First(&member, ID)
 	if result.Error != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": result.Error.Error()})

@@ -33,11 +33,28 @@ func main() {
 		router.PATCH("/seller/:id", controller.UpdateSeller)
 		router.DELETE("/seller/:id", controller.DeleteSeller)
 
+		router.POST("/orders", controller.CreateOrder)
+        router.GET("/orders/:id", controller.GetOrder)
+
+		router.PATCH("/orders/:id", controller.UpdateOrder)
+        router.DELETE("/orders/:id", controller.DeleteOrder)
+		router.GET("/orders/member/:memberId", controller.GetOrdersByMemberID)
+		router.GET("/orders/member/:memberId/product/:productId", controller.GetOrdersByProductIDAndMemberID)
+		router.GET("/orders/seller/:sellerId/product/:productId", controller.GetOrdersByProductIDAndSellerID)
+
+
 		router.GET("/products/:id", controller.GetProductsBYID)
 		router.GET("/products", controller.GetProducts)
 		router.POST("/products", controller.CreateProducts)
 		router.PATCH("/products/:id", controller.UpdateProducts)
 		router.DELETE("/products/:id", controller.DeleteProducts)
+		router.GET("/products_by_member/:member_id", controller.GetProductsByMemberID)
+		router.GET("/products/seller/:seller_id", controller.GetProductsBySellerID)
+
+		router.POST("/products_orders", controller.CreateProductsOrder)
+		router.GET("/products_orders", controller.ListProductsOrders)
+        router.DELETE("/products_orders/:id", controller.DeleteProductsOrder)
+		router.GET("/products_orders/:order_id", controller.GetProductsOrdersByOrderID)
 
 		//Select 
 		router.GET("/years", controller.GetYears)

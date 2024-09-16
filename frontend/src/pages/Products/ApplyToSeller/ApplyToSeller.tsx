@@ -5,7 +5,7 @@ import Logo from "../../../assets/logo.png";
 import "./ApplyToSeller.css"
 import { Button, Form, Row, Col, Input, Select, Card, Flex, message, Upload, GetProp, UploadProps, UploadFile } from "antd";
 import { YearsInterface } from "../../../interfaces/Years";
-import { CreateSeller, GetInstituteOf, GetYear } from "../../../https";
+import { CreateSeller, GetInstituteOf, GetYear } from "../../../services/http/index";
 import { SellerInterface } from "../../../interfaces/Seller";
 import { InstituteOfInterface } from "../../../interfaces/InstituteOf";
 import { UploadOutlined } from "@ant-design/icons";

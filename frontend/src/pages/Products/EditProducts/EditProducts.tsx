@@ -5,7 +5,7 @@ import { Card, Col, Row, Input, Form, InputNumber, Select, Upload, Image, Button
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import type { GetProp, UploadFile, UploadProps } from 'antd';
-import { GetCategory, GetCondition } from '../../../https';
+import { GetCategory, GetCondition } from '../../../services/http';
 import { CategoryInterface } from '../../../interfaces/Category';
 import { ConditionInterface } from '../../../interfaces/Condition';
 

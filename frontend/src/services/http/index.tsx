@@ -1,8 +1,10 @@
 
-import { LoginInterface } from "../interfaces/Login";
-import { MemberInterface } from "../interfaces/Member";
-import { ProductsInterface } from "../interfaces/Products";
-import { SellerInterface } from "../interfaces/Seller";
+import { LoginInterface } from "../../interfaces/Login";
+import { MemberInterface } from "../../interfaces/Member";
+import { ProductsInterface } from "../../interfaces/Products";
+import { Products_Orders } from "../../interfaces/Products_orders";
+import { SellerInterface } from "../../interfaces/Seller";
+import { Orders  } from "../../interfaces/Orders";
 import axios from "axios";
 
 
@@ -36,6 +38,18 @@ async function Login(data: LoginInterface) {
     .catch((e) => e.response);
 
 }
+
+// async function ApplySeller(data: SellerInterface) {
+
+//   return await axios
+
+//     .post(`${apiUrl}/seller`, data, requestOptions)
+
+//     .then((res) => res)
+
+//     .catch((e) => e.response);
+
+// }
 
 
 async function GetMember() {
@@ -101,6 +115,54 @@ async function CreateMember(data: MemberInterface) {
     .catch((e) => e.response);
 
 }
+
+
+// Order Management
+
+// List all orders
+async function GetOrders() {
+  try {
+    const res = await axios.get(`${apiUrl}/orders`);
+    return res.status === 200 ? res.data : false;
+  } catch (error) {
+    return false;
+  }
+}
+
+// Get an order by ID
+async function GetOrderById(id: number | undefined) {
+  try {
+    const res = await axios.get(`${apiUrl}/orders/${id}`);
+    return res.status === 200 ? res.data : false;
+  } catch (error) {
+    return false;
+  }
+}
+
+// Create a new order
+async function CreateOrder(data: Orders) {
+  try {
+    const res = await axios.post(`${apiUrl}/orders`, data);
+    return res.status === 201 ? res.data : false;
+  } catch (error) {
+    return false;
+  }
+}
+
+
+
+// Delete an order by ID
+async function DeleteOrder(id: number | undefined) {
+  try {
+    const res = await axios.delete(`${apiUrl}/orders/${id}`);
+    return res.status === 200;
+  } catch (error) {
+    return false;
+  }
+}
+
+
+
 
 //Seller
 
@@ -296,6 +358,122 @@ async function GetSeller() {
   }
 
 
+
+  // Products Order Management
+
+// List all products-orders
+async function GetProductsOrders() {
+  try {
+    const res = await axios.get(`${apiUrl}/products_orders`);
+    return res.status === 200 ? res.data : false;
+  } catch (error) {
+    return false;
+  }
+}
+
+// Get a products-order by ID
+async function GetProductsOrderById(id: number | undefined) {
+  try {
+    const res = await axios.get(`${apiUrl}/products_orders/${id}`);
+    return res.status === 200 ? res.data : false;
+  } catch (error) {
+    return false;
+  }
+}
+
+// Create a new products-order
+async function CreateProductsOrder(data: Products_Orders) {
+  try {
+    const res = await axios.post(`${apiUrl}/products_orders`, data);
+    return res.status === 201 ? res.data : false;
+  } catch (error) {
+    return false;
+  }
+}
+
+// Update a products-order by ID
+async function UpdateProductsOrder(id: number | undefined, data: Products_Orders) {
+  try {
+    const res = await axios.patch(`${apiUrl}/products_orders/${id}`, data);
+    return res.status === 200 ? res.data : false;
+  } catch (error) {
+    return false;
+  }
+}
+
+// Delete a products-order by ID
+async function DeleteProductsOrder(id: number | undefined) {
+  try {
+    const res = await axios.delete(`${apiUrl}/products_orders/${id}`);
+    return res.status === 200;
+  } catch (error) {
+    return false;
+  }
+}
+
+
+async function GetOrdersByMemberId(memberId: number) {
+  try {
+    const res = await axios.get(`${apiUrl}/orders?member_id=${memberId}`);
+    return res.status === 200 ? res.data : false;
+  } catch (error) {
+    return false;
+  }
+}
+
+// Get all products-orders for a member
+async function GetProductsByMemberId(memberId: number, page: number, pageSize: number) {
+  try {
+    const res = await axios.get(`${apiUrl}/products_by_member/${memberId}`, {
+      params: {
+        page: page,
+        pageSize: pageSize,
+      },
+    });
+    return res.status === 200 ? res.data : false;
+  } catch (error) {
+    return false;
+  }
+}
+
+async function GetProductsBySellerId(sellerId: number, page: number, pageSize: number) {
+  try {
+    const res = await axios.get(`${apiUrl}/products/seller/${sellerId}`, {
+      params: {
+        page: page,
+        pageSize: pageSize,
+      },
+    });
+    return res.status === 200 ? res.data : false;
+  } catch (error) {
+    console.error("Error fetching products by seller ID:", error);
+    return false;
+  }
+}
+
+
+
+async function GetOrdersByProductIDAndMemberID(memberId: number, productId: number) {
+  try {
+    const res = await axios.get(`${apiUrl}/orders/member/${memberId}/product/${productId}`);
+    return res.status === 200 ? res.data : false;
+  } catch (error) {
+    console.error("Error fetching orders by Product ID and Member ID:", error);
+    return false;
+  }
+}
+
+async function GetOrdersByProductIDAndSellerID(sellerId: number, productId: number) {
+  try {
+    const res = await axios.get(`${apiUrl}/orders/seller/${sellerId}/product/${productId}`);
+    return res.status === 200 ? res.data : false;
+  } catch (error) {
+    console.error("Error fetching orders by Product ID and Seller ID:", error);
+    return false;
+  }
+}
+
+//Select
   async function GetYear() {
     const requestOptions = {
       method: "GET",
@@ -385,6 +563,15 @@ export {
   DeleteMemberById,
   GetMemberById,
   UpdateMemberById,
+  GetOrdersByMemberId,
+
+  // ApplySeller,
+
+  //Orsers
+  GetOrders,
+  GetOrderById,
+  CreateOrder,
+  DeleteOrder,
 
   //Seller
   GetSeller,
@@ -399,7 +586,20 @@ export {
   DeleteProductsByID,
   GetProductsById,
   UpdateProducts,
-  // GetProductsBySellerId,
+
+  GetProductsByMemberId,
+  GetProductsBySellerId,
+  GetOrdersByProductIDAndMemberID,
+  GetOrdersByProductIDAndSellerID,
+
+  //ProductsOrders
+  GetProductsOrders,
+  GetProductsOrderById,
+  CreateProductsOrder,
+  UpdateProductsOrder,
+  DeleteProductsOrder,
+
+
 
   //Select ขอแต่ละหน้า
   GetYear,
