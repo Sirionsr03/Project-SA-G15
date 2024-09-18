@@ -34,11 +34,11 @@ func CreateProducts(c *gin.Context) {
 	db := config.DB()
 
 	// ตรวจสอบว่า Seller มีอยู่ในระบบหรือไม่
-	// var seller entity.Seller
-	// if err := db.First(&seller, product.SellerID).Error; err != nil {
-	// 	c.JSON(http.StatusBadRequest, gin.H{"error": "Seller not found"})
-	// 	return
-	// }
+	var seller entity.Seller
+	if err := db.First(&seller, product.SellerID).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Seller not found"})
+		return
+	}
 
 	// สร้าง Product พร้อมกับข้อมูล Seller
 	p := entity.Products{
@@ -50,7 +50,7 @@ func CreateProducts(c *gin.Context) {
 		Status:          product.Status,
 		CategoryID:        product.CategoryID,
 		ConditionID:       product.ConditionID,
-		// SellerID:        seller.ID, // เชื่อมกับ Seller ที่มีอยู่
+		SellerID:        seller.ID, // เชื่อมกับ Seller ที่มีอยู่
 	}
 
 	// บันทึก Product
