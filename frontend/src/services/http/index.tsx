@@ -178,6 +178,8 @@ async function GetSeller() {
   return await GetSellerByStudentId(seller);
 }
 
+
+
 async function GetSellerByStudentId(StudentID: string) {
   return await axios
     .get(`${apiUrl}/seller/StudentID/${StudentID}`, requestOptions)
@@ -237,12 +239,14 @@ async function CreateSeller(data: SellerInterface) {
 
 }
 
-async function GetSellerByMember(id: number) {
+async function GetSellerByMember(member_id: number) {
   return await axios
-    .get(`${apiUrl}/seller/member/${id}`, requestOptions)
+    .get(`${apiUrl}/seller/member/${member_id}`, requestOptions) // ตรวจสอบ URL นี้ว่าเป็น endpoint ที่ถูกต้อง
     .then((res) => res)
     .catch((e) => e.response);
 }
+
+
 
 
 

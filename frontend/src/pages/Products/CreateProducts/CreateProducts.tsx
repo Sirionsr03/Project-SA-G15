@@ -8,10 +8,12 @@ import type { UploadFile, UploadProps } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import ImgCrop from 'antd-img-crop';
 import { ProductsInterface } from '../../../interfaces/Products';
-import { CreateProducts, GetCategory, GetCondition } from '../../../services/http';
+import { CreateProducts, GetCategory, GetCondition, GetMemberById, GetSellerByMember} from '../../../services/http';
 import { CategoryInterface } from '../../../interfaces/Category';
 import { ConditionInterface } from '../../../interfaces/Condition';
 import { SellerInterface } from '../../../interfaces/Seller';
+import { MemberInterface } from '../../../interfaces/Member';
+import axios from 'axios';
 
 // Type definition for image file type
 type FileType = File & { originFileObj?: File };
@@ -27,38 +29,50 @@ function CreateProduct() {
   const [condition, setcondition] = useState<ConditionInterface[]>([]);
   const [fileList, setFileList] = useState<UploadFile[]>([]);
 
-  //ส่วนที่เพิ่มมาใหม่ ****start
-  const [sid , setSid] = useState<number | null>(Number(localStorage.getItem("id")))
+  // ส่วนที่เพิ่มมาใหม่ ****start 
+  const [mid, setMid] = useState<number | null>(null); // เก็บ memberId ที่ล็อกอินอยู่
   const [seller, setSeller] = useState<SellerInterface | null>(null);
-   
-    const GetSellerId = async (member_id:number) => {
-   
-      let res = await GetSellerById(member_id);
-      
-      if (res.status == 200) {
-   
-        setSeller(res.data);
-   
+
+  // ฟังก์ชันสำหรับดึงข้อมูล Seller โดยใช้ memberId
+  const GetSellerByMemberId = async (member_id: number) => {
+    try {
+      let res = await axios.get(`${apiUrl}/seller/member/${member_id}`); // เรียก API โดยใช้ memberId
+      if (res.status === 200 && res.data) {
+        setSeller(res.data); // เก็บข้อมูล seller ใน state
       } else {
-   
-   
         messageApi.open({
-   
           type: "error",
-   
-          content: res.data.error,
-   
+          content: "ไม่พบข้อมูล Seller ที่เชื่อมกับ Member นี้",
         });
-   
       }
-   
-    };
-    useEffect(() => {
-      setSid(Number(localStorage.getItem("id")))
-      console.log(sid);
-      GetSellerId(sid); // ดึงข้อมูลผู้ใช้เมื่อหน้าโหลด
-    }, []);
-    //ส่วนที่เพิ่มมาใหม่******* end
+    } catch (error) {
+      console.error("Error fetching seller data:", error);
+      messageApi.open({
+        type: "error",
+        content: "เกิดข้อผิดพลาดในการดึงข้อมูล Seller",
+      });
+    }
+  };
+
+  // เรียกใช้ฟังก์ชันเมื่อหน้าโหลด
+  useEffect(() => {
+    const member_id_str = localStorage.getItem("id"); // ดึงค่า memberId จาก localStorage
+    const member_id = member_id_str ? Number(member_id_str) : NaN;
+
+    // ตรวจสอบว่า member_id เป็นตัวเลขที่ถูกต้อง
+    if (!isNaN(member_id) && member_id > 0) {
+      setMid(member_id);
+      GetSellerByMemberId(member_id); // ดึงข้อมูล Seller ที่เชื่อมโยงกับ memberId
+    } else {
+      messageApi.open({
+        type: "error",
+        content: "Member ID ไม่ถูกต้องหรือไม่ได้ล็อกอิน",
+      });
+    }
+  }, []);
+  // ส่วนที่เพิ่มมาใหม่******* end
+
+
 
   // Handle file changes
   const onChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {

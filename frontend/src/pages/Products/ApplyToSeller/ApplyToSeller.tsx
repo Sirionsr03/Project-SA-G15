@@ -687,6 +687,8 @@
 
 // Code Test
 
+// member id บันทึกได้แล้ว เซฟเป็นไอดีได้แล้ว
+
 import React, { useEffect, useState } from "react";
 import backarrow from "../../../assets/back-arrow.png";
 import { useNavigate } from "react-router-dom";
@@ -767,23 +769,11 @@ function ApplyToSeller() {
   };
 
   const CheckExistingSeller = async (studentId: string) => {
-    try {
-      let res = await GetSellerByStudentId(studentId); // ฟังก์ชันที่เช็คจาก API หรือฐานข้อมูล
-      console.log("Response from GetSellerByStudentId:", res);
-      
-      // ตรวจสอบว่าค่า status เป็น 400 หรือไม่
-      if (res.status === 400) {
-        return { exists: true, errorMessage: "รหัสนักศึกษานี้ถูกใช้งานแล้ว!" };
-      }
-  
-      // ตรวจสอบว่าสถานะเป็น 200 และมีข้อมูลหรือไม่
-      return res.status === 200 ? { exists: false, data: res.data } : null;
-    } catch (error) {
-      console.error("Error in CheckExistingSeller:", error);
-      return null;
-    }
+    let res = await GetSellerByStudentId(studentId); // ฟังก์ชันที่เช็คจาก API หรือฐานข้อมูล
+    return res.status === 200 ? res.data : null;
   };
   
+
   const onFinish = async (values: SellerInterface) => {
     if (!fileList.length || !fileList[0]?.thumbUrl) {
       messageApi.open({
@@ -801,20 +791,19 @@ function ApplyToSeller() {
       return;
     }
   
+    // ตรวจสอบและตั้งค่าเริ่มต้นให้ StudentID เป็น empty string หากเป็น undefined
     const studentID = values.StudentID ?? "";
     values.PictureStudentID = fileList[0].thumbUrl;
     values.MemberId = mid;
   
     try {
-       existingSeller = await CheckExistingSeller(studentID);
-      console.log("Existing seller data:", existingSeller);
-  
-      if (existingSeller?.exists) {
+      let existingSeller = await CheckExistingSeller(studentID); // ส่งค่า studentID ที่ตรวจสอบแล้ว
+      if (existingSeller) {
         messageApi.open({
           type: "error",
-          content: existingSeller.errorMessage,
+          content: "รหัสนักศึกษานี้ถูกใช้งานแล้ว!",
         });
-        return;  // หยุดการทำงานเมื่อรหัสถูกใช้แล้ว
+        return;
       }
   
       let res = await CreateSeller(values);
@@ -841,7 +830,6 @@ function ApplyToSeller() {
   };
   
   
-
 
 
 
