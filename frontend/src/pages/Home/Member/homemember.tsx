@@ -34,19 +34,19 @@ const HomeMember = () => {
 
   return (
     <>
-      <div className='home'>
+      <div className='homemember'>
         <NavbarMember />
-        <div className='box-page'>
+        <div className='box-pagemember'>
           <center>
             <img src={imageArray[currentImageIndex]} alt="brandner" />
           </center>
         </div>
-        <div className="box-product">
+        <div className="box-productmember">
           <img src={icons1} alt="icon1" /><img src={icons2} alt="icon2" /><img src={icons3} alt="icon3" />
           <img src={icons4} alt="icon4" /><img src={icons5} alt="icon5" /><img src={icons6} alt="icon6" /><img src={icons7} alt="icon7" />
         </div>
 
-        <div className="Naw-arrivals">
+        <div className="Naw-arrivalsmember">
           <p>NEW ARRIVALS</p>
         </div>
 

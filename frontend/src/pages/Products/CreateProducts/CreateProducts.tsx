@@ -17,6 +17,7 @@ type FileType = File & { originFileObj?: File };
 
 const { Option } = Select;
 
+
 // Main CreateProduct component
 function CreateProduct() {
   const navigate = useNavigate();
@@ -115,6 +116,7 @@ function CreateProduct() {
       <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh" }}>
         <Card
           style={{
+            marginLeft:"200px",
             borderRadius: "12px",
             padding: "24px",
             background: "#e2dfdf",
@@ -306,3 +308,11 @@ function CreateProduct() {
 }
 
 export default CreateProduct;
+
+
+
+
+
+
+
+

@@ -14,13 +14,13 @@ export const Course: React.FC<ProductProps> = (props) => {
 
 
   return (
-    <div className="product">
+    <div className="productseller">
         <img src={productImage} alt={productName} />
-      <div className='description'>
+      <div className='descriptionseller'>
         <p>
-          <b className='name-pro'>{productName}</b>
+          <b className='name-proseller'>{productName}</b>
         </p>
-        <p className='money-color'>Price :</p>
+        <p className='money-colorseller'>Price :</p>
       </div>
     </div>
   );

@@ -13,7 +13,7 @@ const NavbarMember = () => {
   };
 
   return (
-    <div className='navbar'>
+    <div className='navbarmember'>
             <img
               src={Logo}
               alt="Course Logo"
@@ -23,15 +23,15 @@ const NavbarMember = () => {
                 marginTop:"0px"
               }}
             />
-     <div className='right-section'>
-       <div className='links'>
+     <div className='right-sectionmember'>
+       <div className='linksmember'>
          <div className="search">
            <input type="text" placeholder="search"/>
          </div>
-         <button className="button-createproduct" onClick={handleApplySeller}>
+         <button className="button-createproductmember" onClick={handleApplySeller}>
            สร้างการขายสินค้า
          </button>
-         <div className="box-navbar">
+         <div className="box-navbarmember">
            <img src={market} alt="market"/>
            <img src={list} alt="list"/>
            <img src={bell} alt="bell"/>

@@ -10,6 +10,7 @@ import { SellerInterface } from "../../../interfaces/Seller";
 import { InstituteOfInterface } from "../../../interfaces/InstituteOf";
 import { UploadOutlined } from "@ant-design/icons";
 import ImgCrop from "antd-img-crop";
+import NavbarMember from "../../../component/navbarMember";
 
 
 type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];

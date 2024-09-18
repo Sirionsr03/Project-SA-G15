@@ -11,7 +11,7 @@ const Navbar = () => {
   const navigate = useNavigate(); // Hook for navigation
 
   const handleHomeSeller = () => {
-    navigate('/SellerHome'); 
+    navigate('/HomeSeller'); 
   };
 
   const handleCreateProduct = () => {

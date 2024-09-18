@@ -13,7 +13,7 @@ const NavbarSeller = () => {
   };
 
   return (
-    <div className='navbar'>
+    <div className='navbarseller'>
             <img
               src={Logo}
               alt="Course Logo"
@@ -23,15 +23,15 @@ const NavbarSeller = () => {
                 marginTop:"0px"
               }}
             />
-     <div className='right-section'>
-       <div className='links'>
+     <div className='right-sectionseller'>
+       <div className='linksseller'>
          <div className="search">
            <input type="text" placeholder="search"/>
          </div>
-         <button className="button-createproduct" onClick={handleCreateProduct}>
+         <button className="button-createproductseller" onClick={handleCreateProduct}>
            เพิ่มสินค้า
          </button>
-         <div className="box-navbar">
+         <div className="box-navbarseller">
            <img src={market} alt="market"/>
            <img src={list} alt="list"/>
            <img src={bell} alt="bell"/>
