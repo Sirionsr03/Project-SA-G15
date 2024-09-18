@@ -8,8 +8,8 @@
   
 .back-arrow {
     position: absolute;
-    top: 60px;
-    right: 325px;
+    top: 30px;
+    left: 520px;
     cursor: pointer;
 }
   
@@ -18,7 +18,7 @@
     padding: 30px;
     border-radius: 15px;
     width: 600px;
-    height: 750px;
+    height: 800px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
   
@@ -107,20 +107,20 @@ input,textarea {
     margin-top: 10px;
 }
 .update {
-    background-color: #444;
+    background-color: #ffa24c;
     color: #fff;
 }
 
 .update.ant-btn:hover{
-    background-color: #333 !important;
-    border-color: #333 !important;
+    background-color: #ff8c1a !important;
+    border-color: #ff8c1a !important;
   }
 
 .cancel {
-    background-color: #ffa24c;
+    background-color: #444;
     color: #fff;
 }
 .cancel.ant-btn:hover{
-    background-color: #ff8c1a !important;
-    border-color: #ff8c1a !important;
+    background-color: #333 !important;
+    border-color: #333 !important;
   }

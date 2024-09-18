@@ -103,6 +103,15 @@ function SignUpPages() {
                     </Form.Item>
                   </Col>
 
+                  <Col xs={24} sm={24} md={24} lg={24} xl={24}>
+                    <Form.Item
+                      label="ชื่อผู้ใช้"
+                      name="user_name"
+                      rules={[{required: true,message: "กรุณากรอกชื่อผู็ใช้ !",},]}>
+                      <Input />
+                    </Form.Item>
+                  </Col>
+
 
                   <Col xs={24} sm={24} md={24} lg={24} xl={24}>
                     <Form.Item
@@ -166,6 +175,5 @@ function SignUpPages() {
   );
 
 }
-
 
 export default SignUpPages;

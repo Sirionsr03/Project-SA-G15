@@ -4,7 +4,7 @@ import { MemberInterface } from "../../interfaces/Member";
 import { ProductsInterface } from "../../interfaces/Products";
 import { Products_Orders } from "../../interfaces/Products_orders";
 import { SellerInterface } from "../../interfaces/Seller";
-import { Orders  } from "../../interfaces/Orders";
+
 import axios from "axios";
 
 
@@ -53,10 +53,20 @@ async function Login(data: LoginInterface) {
 
 
 async function GetMember() {
+  const email = localStorage.getItem('userEmail'); // หรือวิธีการอื่น ๆ ที่ใช้ดึง email
+  if (!email) {
+    throw new Error('Email not found in localStorage');
+  }
+
+  return await GetMemberByEmail(email);
+}
+
+
+async function GetMemberById(id: number) {
 
   return await axios
 
-    .get(`${apiUrl}/users`, requestOptions)
+    .get(`${apiUrl}/member/${id}`, requestOptions)
 
     .then((res) => res)
 
@@ -65,24 +75,11 @@ async function GetMember() {
 }
 
 
-async function GetMemberById(id: string) {
+async function UpdateMemberById(id: number, data: MemberInterface) {
 
   return await axios
 
-    .get(`${apiUrl}/user/${id}`, requestOptions)
-
-    .then((res) => res)
-
-    .catch((e) => e.response);
-
-}
-
-
-async function UpdateMemberById(id: string, data: MemberInterface) {
-
-  return await axios
-
-    .put(`${apiUrl}/user/${id}`, data, requestOptions)
+    .patch(`${apiUrl}/member/${id}`, data, requestOptions)
 
     .then((res) => res)
 
@@ -95,7 +92,7 @@ async function DeleteMemberById(id: string) {
 
   return await axios
 
-    .delete(`${apiUrl}/user/${id}`, requestOptions)
+    .delete(`${apiUrl}/member/${id}`, requestOptions)
 
     .then((res) => res)
 
@@ -114,6 +111,13 @@ async function CreateMember(data: MemberInterface) {
 
     .catch((e) => e.response);
 
+}
+
+async function GetMemberByEmail(email: string) {
+  return await axios
+    .get(`${apiUrl}/member/email/${email}`, requestOptions)
+    .then((res) => res)
+    .catch((e) => e.response);
 }
 
 
@@ -563,6 +567,7 @@ export {
   DeleteMemberById,
   GetMemberById,
   UpdateMemberById,
+  GetMemberByEmail,
   GetOrdersByMemberId,
 
   // ApplySeller,
