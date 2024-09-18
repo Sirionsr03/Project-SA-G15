@@ -4,7 +4,7 @@ import "gorm.io/gorm"
 
 type Seller struct {
 	gorm.Model
-	StudentID        string
+	StudentID        string `gorm:"unique"`
 	Major            string
 	PictureStudentID string `gorm:"type:longtext"`
 

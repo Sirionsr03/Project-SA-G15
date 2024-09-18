@@ -169,100 +169,81 @@ async function DeleteOrder(id: number | undefined) {
 
 
 //Seller
-
 async function GetSeller() {
-    const requestOptions = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-  
-    let res = await fetch(`${apiUrl}/seller`, requestOptions)
-      .then((res) => {
-        if (res.status == 200) {
-          return res.json();
-        } else {
-          return false;
-        }
-      });
-  
-    return res;
+  const seller = localStorage.getItem('seller_id');
+  if (!seller) {
+    throw new Error('Seller not found in localStorage');
   }
-  
 
-  async function DeleteSellerByID(id: number | undefined) {
-    const requestOptions = {
-      method: "DELETE"
-    };
-  
-    let res = await fetch(`${apiUrl}/seller/${id}`, requestOptions)
-      .then((res) => {
-        if (res.status == 200) {
-          return true;
-        } else {
-          return false;
-        }
-      });
-  
-    return res;
-  }
-  
-  async function GetSellerById(id: number | undefined) {
-    const requestOptions = {
-      method: "GET"
-    };
-  
-    let res = await fetch(`${apiUrl}/seller/${id}`, requestOptions)
-      .then((res) => {
-        if (res.status == 200) {
-          return res.json();
-        } else {
-          return false;
-        }
-      });
-  
-    return res;
-  }
-  
-  
-  async function CreateSeller(data: SellerInterface) {
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    };
-  
-    let res = await fetch(`${apiUrl}/seller`, requestOptions)
-      .then((res) => {
-        if (res.status == 201) {
-          return res.json();
-        } else {
-          return false;
-        }
-      });
-  
-    return res;
-  }
-  
-  async function UpdateSeller(data: SellerInterface) {
-    const requestOptions = {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    };
-  
-    let res = await fetch(`${apiUrl}/seller`, requestOptions)
-      .then((res) => {
-        if (res.status == 200) {
-          return res.json();
-        } else {
-          return false;
-        }
-      });
-  
-    return res;
-  }
+  return await GetSellerByStudentId(seller);
+}
+
+async function GetSellerByStudentId(StudentID: string) {
+  return await axios
+    .get(`${apiUrl}/seller/StudentID/${StudentID}`, requestOptions)
+    .then((res) => res)
+    .catch((e) => e.response);
+}
+
+
+async function GetSellerById(id: number) {
+
+  return await axios
+
+    .get(`${apiUrl}/seller/${id}`, requestOptions)
+
+    .then((res) => res)
+
+    .catch((e) => e.response);
+
+}
+
+
+async function UpdateSellerById(id: number, data: SellerInterface) {
+
+  return await axios
+
+    .patch(`${apiUrl}/seller/${id}`, data, requestOptions)
+
+    .then((res) => res)
+
+    .catch((e) => e.response);
+
+}
+
+
+async function DeleteSellerById(id: number) {
+
+  return await axios
+
+    .delete(`${apiUrl}/seller/${id}`, requestOptions)
+
+    .then((res) => res)
+
+    .catch((e) => e.response);
+
+}
+
+
+async function CreateSeller(data: SellerInterface) {
+
+  return await axios
+
+    .post(`${apiUrl}/seller`, data, requestOptions)
+
+    .then((res) => res)
+
+    .catch((e) => e.response);
+
+}
+
+async function GetSellerByMember(id: number) {
+  return await axios
+    .get(`${apiUrl}/seller/member/${id}`, requestOptions)
+    .then((res) => res)
+    .catch((e) => e.response);
+}
+
 
 
 
@@ -581,9 +562,11 @@ export {
   //Seller
   GetSeller,
   CreateSeller,
-  DeleteSellerByID,
+  DeleteSellerById,
   GetSellerById,
-  UpdateSeller,
+  UpdateSellerById,
+  GetSellerByMember,
+  GetSellerByStudentId,
 
   //Products
   GetProducts,

@@ -225,4 +225,3 @@ func DeleteSeller(c *gin.Context) { //ลบข้อมูลผู้ขาย
 	}
 	c.JSON(http.StatusOK, gin.H{"message": "Deleted successful"})
 }
-

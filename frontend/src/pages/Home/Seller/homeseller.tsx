@@ -87,7 +87,7 @@ import icons7 from "../../../icon/pants.png";
 import "./homeseller.css"
 
 import NavbarSeller from '../../../component/navbarSeller';
-import { Course } from './productsseller';
+import { Course } from './prนductsseller';
 
 
 const imageArray = [brandner1, brandner2, brandner3];

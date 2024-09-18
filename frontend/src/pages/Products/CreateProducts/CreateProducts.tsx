@@ -11,6 +11,7 @@ import { ProductsInterface } from '../../../interfaces/Products';
 import { CreateProducts, GetCategory, GetCondition } from '../../../services/http';
 import { CategoryInterface } from '../../../interfaces/Category';
 import { ConditionInterface } from '../../../interfaces/Condition';
+import { SellerInterface } from '../../../interfaces/Seller';
 
 // Type definition for image file type
 type FileType = File & { originFileObj?: File };
@@ -25,6 +26,39 @@ function CreateProduct() {
   const [category, setcategory] = useState<CategoryInterface[]>([]);
   const [condition, setcondition] = useState<ConditionInterface[]>([]);
   const [fileList, setFileList] = useState<UploadFile[]>([]);
+
+  //ส่วนที่เพิ่มมาใหม่ ****start
+  const [sid , setSid] = useState<number | null>(Number(localStorage.getItem("id")))
+  const [seller, setSeller] = useState<SellerInterface | null>(null);
+   
+    const GetSellerId = async (member_id:number) => {
+   
+      let res = await GetSellerById(member_id);
+      
+      if (res.status == 200) {
+   
+        setSeller(res.data);
+   
+      } else {
+   
+   
+        messageApi.open({
+   
+          type: "error",
+   
+          content: res.data.error,
+   
+        });
+   
+      }
+   
+    };
+    useEffect(() => {
+      setSid(Number(localStorage.getItem("id")))
+      console.log(sid);
+      GetSellerId(sid); // ดึงข้อมูลผู้ใช้เมื่อหน้าโหลด
+    }, []);
+    //ส่วนที่เพิ่มมาใหม่******* end
 
   // Handle file changes
   const onChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {

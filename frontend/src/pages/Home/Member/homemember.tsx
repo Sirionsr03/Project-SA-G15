@@ -17,11 +17,46 @@ import "./homemember.css"
 
 import NavbarMember from '../../../component/navbarMember';
 import { Course } from './product';
+import { MemberInterface } from '../../../interfaces/Member';
+import { GetMemberById } from '../../../services/http';
 
 const imageArray = [brandner1, brandner2, brandner3];
 
 const HomeMember = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  //ส่วนที่เพิ่มมาใหม่ ****start
+  const [mid , setMid] = useState<number | null>(Number(localStorage.getItem("id")))
+  const [member, setMember] = useState<MemberInterface | null>(null);
+
+  const GetMemberId = async (member_id:number) => {
+
+    let res = await GetMemberById(member_id);
+    
+    if (res.status == 200) {
+
+      setMember(res.data);
+
+    } else {
+
+
+      messageApi.open({
+
+        type: "error",
+
+        content: res.data.error,
+
+      });
+
+    }
+
+  };
+  useEffect(() => {
+    setMid(Number(localStorage.getItem("id")))
+    console.log(mid);
+    GetMemberId(mid); // ดึงข้อมูลผู้ใช้เมื่อหน้าโหลด
+  }, []);
+  //ส่วนที่เพิ่มมาใหม่******* end
 
   useEffect(() => {
     const interval = setInterval(() => {

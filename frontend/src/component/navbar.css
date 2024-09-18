@@ -53,21 +53,27 @@
   font-size: 25px;
 }
 
-  .search input {
-    padding-left: 30px; 
-    margin-right: 100px;
-    width: 600px;
-    height: 30px;
-    border-radius: 25px;
-    background-image: url('../../icons/search-286.png'); 
-    background-repeat: no-repeat;
-    background-position: 5px center; 
-    background-size: 20px; 
-  }
-  
-  .search input::placeholder {
-    color: #aaa; /* Optional: style the placeholder text */
-  }
+.search {
+  margin-right: 120px; 
+  display: flex;
+  align-items: center;
+  border-radius: 25px;
+}
+
+.search input {
+  border-radius: 60px;
+  border: 3.5px solid #ccc; 
+  padding: 20px; 
+  margin-top: "";
+  width: 600px;
+  height: 0px;
+
+
+}
+
+.search input::placeholder {
+  color: #aaa; 
+}
 
 .button-login{
     background-color: white;
