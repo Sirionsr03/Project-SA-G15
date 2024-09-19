@@ -116,6 +116,7 @@ package controller
 import (
 	"Songthorsut/config"
 	"Songthorsut/entity"
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -217,7 +218,36 @@ func DeleteSeller(c *gin.Context) { //ลบข้อมูลผู้ขาย
 	c.JSON(http.StatusOK, gin.H{"message": "Deleted successful"})
 }
 
-// GET /sellers/member/:member_id ทำงงานได้แล้วห้ามแก้ไข!!!!!!!!!!
+// // GET /sellers/member/:member_id ทำงงานได้แล้วห้ามแก้ไข!!!!!!!!!!
+
+// func GetSellerByMemberId(c *gin.Context) {
+//     // Get the member_id from the URL parameters
+//     memberID := c.Param("member_id")
+
+//     // Initialize the Seller entity
+//     var seller entity.Seller
+
+//     // Get the database instance
+//     db := config.DB()
+
+//     // Preload the associated Member and find the Seller by member_id
+//     result := db.Preload("Member").Where("member_id = ?", memberID).First(&seller)
+
+//     // If no seller is found, return a 404 error
+//     if result.Error != nil {
+//         c.JSON(http.StatusNotFound, gin.H{"error": "Seller not found with the provided MemberID"})
+//         return
+//     }
+
+//     // If successful, return the seller with status 200
+//     c.JSON(http.StatusOK, seller)
+// }
+
+
+
+
+
+// GET /sellers/member/:member_id ทดสอบเฉยๆ ลบได้
 
 func GetSellerByMemberId(c *gin.Context) {
     // Get the member_id from the URL parameters
@@ -238,10 +268,18 @@ func GetSellerByMemberId(c *gin.Context) {
         return
     }
 
-    // If successful, return the seller with status 200
-    c.JSON(http.StatusOK, seller)
-}
+    // Set the SellerID from the retrieved seller
+    sellerID := seller.ID  // Assuming the ID field represents the seller ID
 
+    // Log the seller ID if needed (for debugging)
+    fmt.Printf("Seller ID for Member %s: %d\n", memberID, sellerID)
+
+    // If successful, return the seller with status 200
+    c.JSON(http.StatusOK, gin.H{
+        "seller": seller,
+        "seller_id": sellerID,
+    })
+}
 
 
 

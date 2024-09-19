@@ -69,17 +69,17 @@ import { Button, Card, message } from "antd";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GetProducts } from "../../../services/http/index";
-import "./index.css";
-import Logo from "/Users/gam/sa-67-song_thor_sut/frontend/public/4-Photoroom.png";
-import Back from "/Users/gam/sa-67-song_thor_sut/frontend/public/back.png";
-import Chat from "/Users/gam/sa-67-song_thor_sut/frontend/public/chat.png";
-import List from "/Users/gam/sa-67-song_thor_sut/frontend/public/list.png";
-import Notification from "/Users/gam/sa-67-song_thor_sut/frontend/public/notifications-button.png";
-import ShoppingCartIcon from "/Users/gam/sa-67-song_thor_sut/frontend/public/shopping-cart.png";
+import "./MyProducts.css";
+import Logo from "../../../assets/logo.png";
+import Back from "../../../assets/back-arrow.png";
+import Chat from "../../../assets/chat.png";
+import List from "../../../assets/list.png";
+import Notification from "../../../assets/notifications-button.png";
+import ShoppingCartIcon from "../../../assets/shopping-cart.png";
 
 const { Meta } = Card;
 
-interface Product {
+interface Products {
   ID: number;
   Title: string;
   Price: number;
@@ -91,7 +91,7 @@ interface Product {
 
 const Index: React.FC = () => {
   const navigate = useNavigate();
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<Products[]>([]);
   const [messageApi, contextHolder] = message.useMessage();
 
   // Function to fetch products

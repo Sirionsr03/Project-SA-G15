@@ -4,6 +4,7 @@ import { RouteObject } from "react-router-dom";
 import Loadable from "../component/Loadable";
 import LoginPage from "../pages/authentication/Login/Login";
 import Profile from "../pages/authentication/Member/Profile";
+import MyProducts from "../pages/Products/MyProducts/MyProducts";
 // import ApplyToSeller from "../pages/Products/ApplyToSeller/ApplyToSeller";
 
 
@@ -43,6 +44,11 @@ const MemberRoutes = (isLoggedIn: boolean): RouteObject[] => {
     {
       path: "/createproducts",
       element: <CreateProducts />,
+    },
+
+    {
+      path: "/MyProducts",
+      element: <MyProducts />,
     },
 
     {

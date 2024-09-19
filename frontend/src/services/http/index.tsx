@@ -243,13 +243,29 @@ async function CreateSeller(data: SellerInterface) {
     .catch((e) => e.response);
 
 }
+// // ห้ามแก้ไข!!!!!!
+// async function GetSellerByMember(member_id: number) {
+//   return await axios
+//     .get(`${apiUrl}/seller/member/${member_id}`, requestOptions) // ตรวจสอบ URL นี้ว่าเป็น endpoint ที่ถูกต้อง
+//     .then((res) => res)
+//     .catch((e) => e.response);
+// }
 
-async function GetSellerByMember(member_id: number) {
-  return await axios
-    .get(`${apiUrl}/seller/member/${member_id}`, requestOptions) // ตรวจสอบ URL นี้ว่าเป็น endpoint ที่ถูกต้อง
-    .then((res) => res)
-    .catch((e) => e.response);
+// ทดสอบเฉยๆ ลบได้ แก้ไขได้
+async function GetSellerByMemberId(member_id: number) {
+  try {
+    const res = await axios.get(`${apiUrl}/seller/member/${member_id}`, requestOptions); // Fetch seller by member_id
+    if (res.status === 200) {
+      return res.data; // Return the seller data from the response
+    } else {
+      return { error: res.data?.error || "Failed to fetch seller information." };
+    }
+  } catch (error) {
+    return { error: "An error occurred while fetching seller information." };
+  }
 }
+
+
 
 async function GetSellerIdByMemberId(seller_id: number, member_id: number) {
   return await axios
@@ -302,7 +318,7 @@ async function GetSellerIdByMemberId(seller_id: number, member_id: number) {
   
     return res;
   }
-  
+
 
   async function DeleteProductsByID(id: number | undefined) {
     const requestOptions = {
@@ -599,7 +615,8 @@ export {
   CreateSeller,
   DeleteSellerById,
   UpdateSellerById,
-  GetSellerByMember,
+  // GetSellerByMember,
+  GetSellerByMemberId,
   GetSellerByStudentId,
   GetSellerIdByMemberId,
 

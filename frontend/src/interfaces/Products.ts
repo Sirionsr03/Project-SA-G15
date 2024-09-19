@@ -8,5 +8,5 @@ export interface ProductsInterface {
 	Status?:          string;	
 	CategoryID?:        number;
 	ConditionID?:       number;
-	SellerID?: number;
+	SellerId?: number;
 }
