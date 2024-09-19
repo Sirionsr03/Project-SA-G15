@@ -33,7 +33,7 @@ func main() {
 		router.POST("/seller", controller.CreateSeller)
 		router.PATCH("/seller/:id", controller.UpdateSeller)
 		router.DELETE("/seller/:id", controller.DeleteSeller)
-		router.GET("/seller/member/:member_id", controller.GetSellerByMemberID)
+		router.GET("/seller/member/:member_id", controller.GetSellerByMemberId)
 		router.GET("/sellers/:seller_id/member/:member_id", controller.GetSellerIdByMemberID)
 		
 

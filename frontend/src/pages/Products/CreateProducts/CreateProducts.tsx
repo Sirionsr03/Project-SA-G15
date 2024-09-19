@@ -31,33 +31,9 @@ function CreateProduct() {
 
 
   //ส่วนที่เพิ่มสำหรับเซ็ตค่า Seller************************************************************************
-  const [mid, setMid] = useState<number | null>(Number(localStorage.getItem("id"))); // ดึง memberId จาก localStorage
-  const [seller, setSeller] = useState<SellerInterface | null>(null);
-
-  // ฟังก์ชันดึงข้อมูล seller โดยใช้ memberId
-  const GetSellerByMemberId = async (member_id: number) => {
-    try {
-      let res = await GetSellerByMember(member_id); // เรียกใช้ API เพื่อดึงข้อมูล seller
-      if (res.status === 200) {
-        setSeller(res.data); // เซ็ตข้อมูล seller ที่ได้มา
-      } else {
-        throw new Error(res.data?.error || "ไม่พบข้อมูลผู้ขาย.");
-      }
-    } catch (error) {
-      message.error(error.message || "เกิดข้อผิดพลาดในการดึงข้อมูลผู้ขาย.");
-    }
-  };
-
-  useEffect(() => {
-    const storedMemberId = Number(localStorage.getItem("id"));
-    setMid(storedMemberId); // เซ็ต memberId จาก localStorage
-
-    if (storedMemberId) {
-      console.log("Member ID:", storedMemberId); // สำหรับตรวจสอบค่า memberId
-      GetSellerByMemberId(storedMemberId); // ดึงข้อมูล seller โดยใช้ memberId
-    }
-  }, []);
+  
   //ส่วนที่เพิ่ม************************************************************************
+
 
 
   // Handle file changes

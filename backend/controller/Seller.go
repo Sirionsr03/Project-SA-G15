@@ -217,8 +217,9 @@ func DeleteSeller(c *gin.Context) { //ลบข้อมูลผู้ขาย
 	c.JSON(http.StatusOK, gin.H{"message": "Deleted successful"})
 }
 
-// GET /sellers/member/:member_id
-func GetSellerByMemberID(c *gin.Context) {
+// GET /sellers/member/:member_id ทำงงานได้แล้วห้ามแก้ไข!!!!!!!!!!
+
+func GetSellerByMemberId(c *gin.Context) {
     // Get the member_id from the URL parameters
     memberID := c.Param("member_id")
 
@@ -240,6 +241,10 @@ func GetSellerByMemberID(c *gin.Context) {
     // If successful, return the seller with status 200
     c.JSON(http.StatusOK, seller)
 }
+
+
+
+
 
 
 //เพิ่ม seller id ทดสอบ
