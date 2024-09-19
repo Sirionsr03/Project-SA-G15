@@ -589,7 +589,7 @@ function CreateProduct() {
                 {/* Product Category */}
                 <Form.Item
                   label="หมวดหมู่สินค้า"
-                  name="Category"
+                  name="CategoryID"
                   rules={[{ required: true, message: "กรุณาเลือกหมวดหมู่สินค้า!" }]}
                   style={{ marginBottom: "16px" }}
                 >
@@ -605,7 +605,7 @@ function CreateProduct() {
                 {/* Product Condition */}
                 <Form.Item
                   label="สภาพสินค้า"
-                  name="Condition"
+                  name="ConditionID"
                   rules={[{ required: true, message: "กรุณาเลือกสภาพสินค้า!" }]}
                   style={{ marginBottom: "16px" }}
                 >
