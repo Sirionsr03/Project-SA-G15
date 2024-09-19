@@ -8,7 +8,6 @@
 // 	"github.com/gin-gonic/gin"
 // )
 
-
 // // POST /sellers
 // func CreateSeller(c *gin.Context) {
 // 	var seller entity.Seller
@@ -40,7 +39,7 @@
 // 	// สร้าง Seller
 // 	s := entity.Seller{
 // 		StudentID:        seller.StudentID,
-// 		Major:            seller.Major,		
+// 		Major:            seller.Major,
 // 		YearsID:          seller.YearsID,
 // 		InstituteOfID:    seller.InstituteOfID,
 // 		PictureStudentID: seller.PictureStudentID,
@@ -56,7 +55,6 @@
 
 // 	c.JSON(http.StatusCreated, gin.H{"message": "Created success", "data": s})
 // }
-
 
 // // GET /sellers/:id
 // func GetSeller(c *gin.Context) {
@@ -112,14 +110,7 @@
 // 	c.JSON(http.StatusOK, gin.H{"message": "Deleted successful"})
 // }
 
-
-
-
-
-
-
-
-//ทดสอบอัปรูป
+// ทดสอบอัปรูป
 package controller
 
 import (
@@ -129,7 +120,6 @@ import (
 
 	"github.com/gin-gonic/gin"
 )
-
 
 // POST /sellers
 func CreateSeller(c *gin.Context) {
@@ -170,8 +160,6 @@ func CreateSeller(c *gin.Context) {
 	c.JSON(http.StatusCreated, gin.H{"message": "Created successfully", "data": newSeller})
 }
 
-
-
 // GET /sellers/:id
 func GetSeller(c *gin.Context) {
 	ID := c.Param("id")
@@ -188,6 +176,9 @@ func GetSeller(c *gin.Context) {
 
 	c.JSON(http.StatusOK, seller)
 }
+
+
+  
 
 // PATCH /sellers/:id
 func UpdateSeller(c *gin.Context) {
@@ -225,3 +216,62 @@ func DeleteSeller(c *gin.Context) { //ลบข้อมูลผู้ขาย
 	}
 	c.JSON(http.StatusOK, gin.H{"message": "Deleted successful"})
 }
+
+// GET /sellers/member/:member_id
+func GetSellerByMemberID(c *gin.Context) {
+    // Get the member_id from the URL parameters
+    memberID := c.Param("member_id")
+
+    // Initialize the Seller entity
+    var seller entity.Seller
+
+    // Get the database instance
+    db := config.DB()
+
+    // Preload the associated Member and find the Seller by member_id
+    result := db.Preload("Member").Where("member_id = ?", memberID).First(&seller)
+
+    // If no seller is found, return a 404 error
+    if result.Error != nil {
+        c.JSON(http.StatusNotFound, gin.H{"error": "Seller not found with the provided MemberID"})
+        return
+    }
+
+    // If successful, return the seller with status 200
+    c.JSON(http.StatusOK, seller)
+}
+
+
+//เพิ่ม seller id ทดสอบ
+//Get /sellers/:seller_id/member/:member_id
+
+func GetSellerIdByMemberID(c *gin.Context) {
+    // Get the seller_id and member_id from the URL parameters
+    sellerID := c.Param("seller_id")
+    memberID := c.Param("member_id")
+
+    // Initialize the Seller entity
+    var seller entity.Seller
+
+    // Get the database instance
+    db := config.DB()
+
+    // Preload the associated Member and find the Seller by both seller_id and member_id
+    result := db.Preload("Member").Where("id = ? AND member_id = ?", sellerID, memberID).First(&seller)
+
+    // If no seller is found, return a 404 error
+    if result.Error != nil {
+        c.JSON(http.StatusNotFound, gin.H{"error": "Seller not found with the provided SellerID and MemberID"})
+        return
+    }
+
+    // If successful, return the seller including the seller_id and member_id with status 200
+    c.JSON(http.StatusOK, gin.H{
+        "seller_id": seller.ID, // Assuming seller_id is stored in the ID field
+        "member_id": seller.MemberID, // Assuming member_id is stored in the MemberID field of the Seller entity
+        "seller":    seller,    // Send the complete seller information
+    })
+}
+
+
+

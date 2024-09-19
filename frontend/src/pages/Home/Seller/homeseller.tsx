@@ -88,12 +88,43 @@ import "./homeseller.css"
 
 import NavbarSeller from '../../../component/navbarSeller';
 import { Course } from './prนductsseller';
+import { GetSellerByMember } from '../../../services/http';
+import { MemberInterface } from '../../../interfaces/Member';
+
 
 
 const imageArray = [brandner1, brandner2, brandner3];
 
 const HomeSeller = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  //ส่วนที่เพิ่มสำหรับเซ็ตค่า Seller************************************************************************
+  const [mid, setMid] = useState<number | null>(Number(localStorage.getItem("id")));
+  const [member, setMember] = useState<MemberInterface | null>(null);
+
+  const GetSellerByMemberID = async (member_id: number) => {
+    let res = await GetSellerByMember(member_id); // Use the GetSellerByMember function
+    if (res.status === 200) {
+      setMember(res.data); // Set the fetched member data
+    } else {
+      messageApi.open({
+        type: "error",
+        content: res.data?.error || "Failed to fetch member information.",
+      });
+    }
+  };
+
+  useEffect(() => {
+    const storedId = Number(localStorage.getItem("id"));
+    setMid(storedId); // Set mid from localStorage
+
+    if (storedId) {
+      console.log(storedId); // Log the correct value for debugging
+      GetSellerByMemberID(storedId); // Fetch seller by member ID
+    }
+  }, []);
+  //ส่วนที่เพิ่ม************************************************************************
+
 
   useEffect(() => {
     const imageInterval = setInterval(() => {
@@ -110,7 +141,7 @@ const HomeSeller = () => {
   }, []);
 
   return (
-    <>
+    <>      
       <div className='homeseller'>
         <NavbarSeller />
         <div className='box-pageseller'>

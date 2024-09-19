@@ -8,7 +8,7 @@ import type { UploadFile, UploadProps } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import ImgCrop from 'antd-img-crop';
 import { ProductsInterface } from '../../../interfaces/Products';
-import { CreateProducts, GetCategory, GetCondition, GetMemberById, GetSellerByMember} from '../../../services/http';
+import { CreateProducts, GetCategory, GetCondition, GetSeller, GetSellerByMember, GetSellerIdByMember, GetSellerIdByMemberId} from '../../../services/http';
 import { CategoryInterface } from '../../../interfaces/Category';
 import { ConditionInterface } from '../../../interfaces/Condition';
 import { SellerInterface } from '../../../interfaces/Seller';
@@ -29,49 +29,35 @@ function CreateProduct() {
   const [condition, setcondition] = useState<ConditionInterface[]>([]);
   const [fileList, setFileList] = useState<UploadFile[]>([]);
 
-  // // ส่วนที่เพิ่มมาใหม่ ****start 
-  // const [mid, setMid] = useState<number | null>(null); // เก็บ memberId ที่ล็อกอินอยู่
-  // const [seller, setSeller] = useState<SellerInterface | null>(null);
 
-  // // ฟังก์ชันสำหรับดึงข้อมูล Seller โดยใช้ memberId
-  // const GetSellerByMemberId = async (member_id: number) => {
-  //   try {
-  //     let res = await axios.get(`${apiUrl}/seller/member/${member_id}`); // เรียก API โดยใช้ memberId
-  //     if (res.status === 200 && res.data) {
-  //       setSeller(res.data); // เก็บข้อมูล seller ใน state
-  //     } else {
-  //       messageApi.open({
-  //         type: "error",
-  //         content: "ไม่พบข้อมูล Seller ที่เชื่อมกับ Member นี้",
-  //       });
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching seller data:", error);
-  //     messageApi.open({
-  //       type: "error",
-  //       content: "เกิดข้อผิดพลาดในการดึงข้อมูล Seller",
-  //     });
-  //   }
-  // };
+  //ส่วนที่เพิ่มสำหรับเซ็ตค่า Seller************************************************************************
+  const [mid, setMid] = useState<number | null>(Number(localStorage.getItem("id"))); // ดึง memberId จาก localStorage
+  const [seller, setSeller] = useState<SellerInterface | null>(null);
 
-  // // เรียกใช้ฟังก์ชันเมื่อหน้าโหลด
-  // useEffect(() => {
-  //   const member_id_str = localStorage.getItem("id"); // ดึงค่า memberId จาก localStorage
-  //   const member_id = member_id_str ? Number(member_id_str) : NaN;
+  // ฟังก์ชันดึงข้อมูล seller โดยใช้ memberId
+  const GetSellerByMemberId = async (member_id: number) => {
+    try {
+      let res = await GetSellerByMember(member_id); // เรียกใช้ API เพื่อดึงข้อมูล seller
+      if (res.status === 200) {
+        setSeller(res.data); // เซ็ตข้อมูล seller ที่ได้มา
+      } else {
+        throw new Error(res.data?.error || "ไม่พบข้อมูลผู้ขาย.");
+      }
+    } catch (error) {
+      message.error(error.message || "เกิดข้อผิดพลาดในการดึงข้อมูลผู้ขาย.");
+    }
+  };
 
-  //   // ตรวจสอบว่า member_id เป็นตัวเลขที่ถูกต้อง
-  //   if (!isNaN(member_id) && member_id > 0) {
-  //     setMid(member_id);
-  //     GetSellerByMemberId(member_id); // ดึงข้อมูล Seller ที่เชื่อมโยงกับ memberId
-  //   } else {
-  //     messageApi.open({
-  //       type: "error",
-  //       content: "Member ID ไม่ถูกต้องหรือไม่ได้ล็อกอิน",
-  //     });
-  //   }
-  // }, []);
-  // // ส่วนที่เพิ่มมาใหม่******* end
+  useEffect(() => {
+    const storedMemberId = Number(localStorage.getItem("id"));
+    setMid(storedMemberId); // เซ็ต memberId จาก localStorage
 
+    if (storedMemberId) {
+      console.log("Member ID:", storedMemberId); // สำหรับตรวจสอบค่า memberId
+      GetSellerByMemberId(storedMemberId); // ดึงข้อมูล seller โดยใช้ memberId
+    }
+  }, []);
+  //ส่วนที่เพิ่ม************************************************************************
 
 
   // Handle file changes

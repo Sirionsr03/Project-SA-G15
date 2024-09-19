@@ -16,7 +16,8 @@ type Member struct {
 	ProfilePic string `gorm:"type:longtext"`
 
 
-	Seller Seller `gorm:"foreignKey:MemberID"`
+	// Seller Seller `gorm:"foreignKey:MemberID"`
+
 
 	// YearsID uint
 	// Years Years `gorm:"foreignKey:YearsID"`

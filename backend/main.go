@@ -24,6 +24,7 @@ func main() {
 	router := r.Group("/")
 	{
 		router.GET("/member/:id", Member.GetMember)
+		router.GET("/member", Member.ListMembers)
 		router.POST("/member", Member.CreateMember)
 		router.PATCH("/member/:id", Member.UpdateMember)
 		router.DELETE("/member/:id", Member.DeleteMember)
@@ -32,6 +33,9 @@ func main() {
 		router.POST("/seller", controller.CreateSeller)
 		router.PATCH("/seller/:id", controller.UpdateSeller)
 		router.DELETE("/seller/:id", controller.DeleteSeller)
+		router.GET("/seller/member/:member_id", controller.GetSellerByMemberID)
+		router.GET("/sellers/:seller_id/member/:member_id", controller.GetSellerIdByMemberID)
+		
 
 		router.POST("/orders", controller.CreateOrder)
         router.GET("/orders/:id", controller.GetOrder)

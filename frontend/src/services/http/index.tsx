@@ -169,14 +169,14 @@ async function DeleteOrder(id: number | undefined) {
 
 
 //Seller
-async function GetSeller() {
-  const seller = localStorage.getItem('seller_id');
-  if (!seller) {
-    throw new Error('Seller not found in localStorage');
-  }
+// async function GetSeller() {
+//   const seller = localStorage.getItem('seller_id');
+//   if (!seller) {
+//     throw new Error('Seller not found in localStorage');
+//   }
 
-  return await GetSellerByStudentId(seller);
-}
+//   return await GetSellerByStudentId(seller);
+// }
 
 
 
@@ -188,7 +188,7 @@ async function GetSellerByStudentId(StudentID: string) {
 }
 
 
-async function GetSellerById(id: number) {
+async function GetSeller(id: number) {
 
   return await axios
 
@@ -199,6 +199,9 @@ async function GetSellerById(id: number) {
     .catch((e) => e.response);
 
 }
+
+
+
 
 
 async function UpdateSellerById(id: number, data: SellerInterface) {
@@ -245,6 +248,22 @@ async function GetSellerByMember(member_id: number) {
     .then((res) => res)
     .catch((e) => e.response);
 }
+
+async function GetSellerIdByMemberId(seller_id: number, member_id: number) {
+  try {
+    // แก้ไข URL ให้ตรงตามที่ต้องการ
+    const response = await axios.get(`${apiUrl}/sellers/${seller_id}/member/${member_id}`, requestOptions);
+    
+    // สมมติว่า seller_id และ member_id อยู่ใน response.data
+    const sellerData = response.data;
+
+    // ส่งกลับ seller_id และ member_id จาก response
+    return { seller_id: sellerData.seller_id, member_id: sellerData.member_id, seller: sellerData.seller };
+  } catch (error) {
+    return error.response;
+  }
+}
+
 
 
 
@@ -567,10 +586,10 @@ export {
   GetSeller,
   CreateSeller,
   DeleteSellerById,
-  GetSellerById,
   UpdateSellerById,
   GetSellerByMember,
   GetSellerByStudentId,
+  GetSellerIdByMemberId,
 
   //Products
   GetProducts,

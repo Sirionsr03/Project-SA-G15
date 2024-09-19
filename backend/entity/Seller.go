@@ -8,7 +8,10 @@ type Seller struct {
 	Major            string
 	PictureStudentID string `gorm:"type:longtext"`
 
-	MemberID uint       `gorm:"unique"`
+	// MemberID uint       `gorm:"unique"`
+	MemberID uint
+	Member   Member `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
+	
 	Products []Products `gorm:"foreignKey:SellerID"`
 
 	YearsID uint
